@@ -4,6 +4,8 @@
 | ------------- | 
 | ![Bladee](https://media.discordapp.net/attachments/818734089724493855/819657745376608356/unknown.png) |
 
+*Please read the [disclaimer](https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker#disclaimer) section before reading forward*
+
 ## Features:
 1. `Protect From Unathorised Bans.`
 2. `Protect From Unathorised Kicks.`
