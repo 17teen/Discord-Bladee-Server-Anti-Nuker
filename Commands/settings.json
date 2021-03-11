@@ -9,7 +9,7 @@
   "sourceCode": "https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker",
   "inviteLink": "",
   "SupportServer": "",
-  "AllowGuilds": true,
+  "AllowGuilds": false,
   "LockGuildID": "",
   "PermittedGuilds": []
 }
