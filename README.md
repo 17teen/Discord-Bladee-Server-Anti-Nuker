@@ -4,7 +4,7 @@
 | ------------- | 
 | ![Bladee](https://media.discordapp.net/attachments/818734089724493855/819657745376608356/unknown.png) |
 
-*Please read the [disclaimer](https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker#disclaimer) section before reading forward*
+*Please read the [disclaimer](https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker#disclaimer) section before reading forward. Also read everything that is said here to avoid any confusion and unnecessary questions*
 
 ## Features:
 1. `Protect From Unathorised Bans.`
@@ -88,12 +88,13 @@
 
 # Things to note:
 
-- Your bot must first be allocated a guild. You can do this by setting your server ID to the `LockedGuild` object in the `Commands/settings.json` file.
+- Your bot must first be allocated a guild. You can do this by setting your server ID to the `LockGuild` object in the `Commands/settings.json` file.
 - If you want the bot to be added to other servers you must enable guilds. **The server your bot joins must be permitted/whitelisted before joining or it will leave.**
 - If a command is ran on a non-permitted guild, the bot will leave.
 - The trust system allows a user to add/remove guilds, blacklist/whitelist users, enable/disable guilds. **They cannot allocate of users to the trust system. Give this permission to the people you trust the most.**
 - Whitelisted and Trusted users are not effected by the anti nuke. They will not be banned.
 - Blacklisted users are unable to join the guild(s) the bot is in.
+- Once you enable guilds (can be done by setting the `AllowGuilds` object to true), make sure you add your `lockGuild` ID to the `PermittedGuilds` Array for every command to function.
 
 ### Examples
 
