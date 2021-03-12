@@ -11,8 +11,8 @@ const settings = require('./settings.json');
 const token = settings.token;
 const prefix = settings.prefix;
 const author = settings.author;
-const enableGuilds = settings.AllowGuilds;
 const settings2 = require('./Commands/settings.json');
+const enableGuilds = settings2.AllowGuilds;
 // White Listing/Black Listing
 const Acess = require('./Commands/Database/whitelist.json');
 const Bacess = require('./Commands/Database/blacklist.json');
@@ -166,22 +166,25 @@ client.on("guildCreate", async guild => {
     console.log(greenBright(`[GUILD JOINED] ${guild.name} | [ID] ${guild.id} | [ (+) MEMBERCOUNT: ${guild.memberCount}]`));
     console.log(``);
 
-    const AllowedGuildIDs = settings2.PermittedGuilds.find((g) => g === `${guild.id}`)
+    const AllowedGuildIDs = settings2.PermittedGuilds.find((g) => g === `${guild.id}`);
+    const PrivGuild = settings2.LockGuildID;
 
     if (enableGuilds === false) {
-        return guild.leave().then(
-            console.log(greenBright('Invited to unauthorised guild.'))
-        );
-    } else if (guild.id !== AllowedGuildIDs) {
-        return guild.leave().then(
-            console.log(greenBright('Invited to unauthorised guild.'))
-        );
-    } else if (guild.id === AllowedGuildIDs) {
-        return console.log(greenBright('Invited to an authorised guild.'));
-    } else if (guild.id === settings2.LockGuildID) {
-        return console.log(greenBright('Invited to an authorised guild.'));
+        if (guild.id !== PrivGuild) {
+            return guild.leave().then(
+                console.log(greenBright('Invited to unauthorised guild.'))
+            );
+        } else {
+            return console.log(greenBright('Invited to an authorised guild.'));
+        }
     } else {
-        return;
+        if (guild.id === AllowedGuildIDs || PrivGuild) {
+            return console.log(greenBright('Invited to an authorised guild.'));
+        } else {
+            return guild.leave().then(
+                console.log(greenBright('Invited to unauthorised guild.'))
+            );
+        }
     }
 });
 
