@@ -12,6 +12,7 @@ const token = settings.token;
 const prefix = settings.prefix;
 const author = settings.author;
 const enableGuilds = settings.AllowGuilds;
+const settings2 = require('./Commands/settings.json');
 // White Listing/Black Listing
 const Acess = require('./Commands/Database/whitelist.json');
 const Bacess = require('./Commands/Database/blacklist.json');
@@ -165,7 +166,7 @@ client.on("guildCreate", async guild => {
     console.log(greenBright(`[GUILD JOINED] ${guild.name} | [ID] ${guild.id} | [ (+) MEMBERCOUNT: ${guild.memberCount}]`));
     console.log(``);
 
-    const AllowedGuildIDs = settings.PermittedGuilds.find((g) => g === `${guild.id}`)
+    const AllowedGuildIDs = settings2.PermittedGuilds.find((g) => g === `${guild.id}`)
 
     if (enableGuilds === false) {
         return guild.leave().then(
@@ -176,7 +177,9 @@ client.on("guildCreate", async guild => {
             console.log(greenBright('Invited to unauthorised guild.'))
         );
     } else if (guild.id === AllowedGuildIDs) {
-        return console.log(greenBright('Invited to an authorised guild.'))
+        return console.log(greenBright('Invited to an authorised guild.'));
+    } else if (guild.id === settings2.LockGuildID) {
+        return console.log(greenBright('Invited to an authorised guild.'));
     } else {
         return;
     }
