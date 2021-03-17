@@ -21,6 +21,14 @@
 12. `Blacklisting.`
 13. `Trust System.`
 
+## Current Benchmark(s): Bypass
+
+- Selfbot Nuker: `53 bans`
+- Bot Nuker: `Not Tested`
+
+*Only fast nukers are used for testing. A generic nuke tool would not get passed **50 bans.***
+
+
 # Requirements Before Set-up:
 
 1. [Node.JS](https://nodejs.org/en/) installed.
