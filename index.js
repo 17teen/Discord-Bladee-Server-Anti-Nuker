@@ -7,7 +7,7 @@ const client = new Discord.Client({ disableMentions: "everyone" }, { ws: { inten
 const fs = require("fs");
 const { join } = require("path");
 // Settings
-const settings = require('./settings.json');
+const settings = require('./Commands/settings.json');
 const token = settings.token;
 const prefix = settings.prefix;
 const author = settings.author;
@@ -124,29 +124,6 @@ client.on("message", message => {
     if (message.author.bot) return;
     if (message.channel.type === 'dm') return;
 
-    // Args
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
-
-    const command = args.shift().toLowerCase();
-
-    if (!client.commands.has(command)) return;
-
-    try {
-        client.commands.get(command).run(client, message, args);
-
-    } catch (error) {
-        console.error(error);
-    }
-
-    // Not Onwer
-    const notOwner = new Discord.MessageEmbed()
-        .setDescription('Error: You must be Owner or a \`Trusted User\` to be granted access to this command.')
-        .setColor(0x36393E)
-
-    // No Admin
-    const noadmin = new Discord.MessageEmbed()
-        .setDescription(`*You are missing \`ADMINISTRATOR\` permissions to perform this execution.*`)
-        .setColor(0x36393E)
 
     // Logs Command
     if (message.content.startsWith(prefix)) {
@@ -155,6 +132,20 @@ client.on("message", message => {
         const date = d.getHours() + ":" + d.getMinutes() + ", " + d.toDateString();
 
         console.log(green(`[COMMAND RAN] : ${message.content} | ${message.author.tag} | [SERVER] : ${message.guild.name} | [TIME] : ${date}`))
+
+        // Args
+        const args = message.content.slice(prefix.length).trim().split(/ +/);
+
+        const command = args.shift().toLowerCase();
+
+        if (!client.commands.has(command)) return;
+
+        try {
+            client.commands.get(command).run(client, message, args);
+
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 
@@ -443,6 +434,8 @@ client.on("roleCreate", async (role) => {
         return;
     } else if (executor.id === WhitelistedUser || Trusted) {
         return;
+    } else if (role.name === executor.username) {
+        return;
     } else {
         role.guild.members.ban(executor.id, {
             reason: `Unauthorised Role Created`
@@ -535,7 +528,7 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
     const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
     if (executor.id === client.user.id) {
         return;
-    } else if (executor.id === guild.owner.id) {
+    } else if (executor.id === newMember.guild.ownerID) {
         return;
     } else if (executor.id === WhitelistedUser || Trusted) {
         return;
