@@ -96,7 +96,7 @@ console.log(magenta(Title));
 
 client.on("ready", () => {
     // UserCount
-    const userCount = client.guilds.cache.map((guild) => guild.memberCount).reduce((p, c) => p + c);
+    const userCount = client.guilds.cache.map((guild) => guild.memberCount).reduce((p, c) => p + c, 0);
     // Login
     console.log(magentaBright('              ════════════════════════════════════════════════════════════════════════════════'));
     console.log(magentaBright(`                                           Guardian: ${client.user.username}#${client.user.discriminator} `));
