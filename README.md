@@ -4,6 +4,8 @@
 | ------------- | 
 | ![Bladee](https://media.discordapp.net/attachments/818734089724493855/819657745376608356/unknown.png) |
 
+A Youtube tutorial was posted on this tool. [Click Here.](https://www.youtube.com/watch?v=TSlY4N0Tlo4)
+
 *Please read the [disclaimer](https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker#disclaimer) section before reading forward. Also read everything that is said here to avoid any confusion and unnecessary questions*
 
 ## Features:
