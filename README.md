@@ -26,7 +26,7 @@ A Youtube tutorial was posted on this tool. [Click Here.](https://www.youtube.co
 ## Current Benchmark(s): Bypass
 
 - Selfbot Nuker: `53 bans`
-- Bot Nuker: `Not Tested`
+- Bot Nuker: `26 bans`
 
 *Only fast nukers are used for testing. A generic nuke tool would not get passed **50 bans.***
 
