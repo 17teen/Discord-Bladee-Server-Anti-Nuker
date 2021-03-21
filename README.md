@@ -72,6 +72,19 @@
 * `LockGuildID` |`string`| A server where your bot will soley operate in. (If `AllowGuilds` is set to true this is inefective.)
 * `PermittedGuilds` |`Array`| An array of servers you'd like the bot to operate in.
 
+## Why your bot keeps leaving:
+
+*The guild which you invited the bot or trying to run a command in is not whitelisted.*
+
+if: `AllowGuilds` is set to `false`
+
+- You can only add **one** guild ID to the `LockGuildID` object.
+
+if: `AllowGuilds` is set to `true`
+
+- You can add multiple guild ID's to the `PermittedGuilds` Array
+- If your previous guild ID which is in `LockGuildID` is not in `PermittedGuilds` add it so it wont leave the server.
+
 ## Start-up:
 
 1. Run the `run.bat` file.
