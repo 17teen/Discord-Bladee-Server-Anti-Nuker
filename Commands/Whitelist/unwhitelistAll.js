@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix, LockGuildID, PermittedGuilds, AllowGuilds } = require('../settings.json');
+const { prefix, LockGuildID, PermittedGuilds, AllowGuilds, founderId, founder } = require('../settings.json');
 const { red, green, blue, yellow, cyan, magenta, greenBright, bgGreen, magentaBright, yellowBright } = require('chalk');
 const TrustedUserIDs = require('../Database/trustedUserIDs.json');
 const Acess = require('../Database/whitelist.json');
@@ -42,7 +42,7 @@ module.exports = {
                     message.guild.leave();
                 }, 6000)
             } else {
-                if (message.author.id === founderID || Trusted) {
+                if (message.author.id === founderId || Trusted) {
                     async function UnwhitelistAll() {
                         const Array = Acess;
                         const Array2 = Whitelsited;
@@ -101,7 +101,7 @@ module.exports = {
                     message.guild.leave();
                 }, 6000)
             } else {
-                if (message.author.id === founderID || Trusted) {
+                if (message.author.id === founderId || Trusted) {
                     async function UnwhitelistAll() {
                         const Array = Acess;
                         const Array2 = Whitelsited;
