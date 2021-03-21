@@ -10,6 +10,7 @@ module.exports = {
     description: "help command",
 
     async run(client, message, args) {
+
         // Not Onwer
         const notOwner = new Discord.MessageEmbed()
             .setDescription('Error: You must be Owner or a \`Trusted User\` to be granted access to this command.')
@@ -42,7 +43,7 @@ module.exports = {
                 }, 6000)
             } else {
                 if (message.author.id === founderId || Trusted) {
-                    function enableMultipleGuilds() {
+                    async function enableMultipleGuilds() {
                         const eGuilds = settings;
 
                         settings.AllowGuilds = true;
@@ -57,7 +58,9 @@ module.exports = {
                         fs.writeFileSync('Commands/settings.json', content, 'utf8');
 
                     }
-                    enableMultipleGuilds()
+                    enableMultipleGuilds().then(
+                        console.log(yellowBright(`Restarting`))
+                    );
                 } else {
                     message.channel.send(notOwner)
                 }
@@ -87,7 +90,7 @@ module.exports = {
                 }, 6000)
             } else {
                 if (message.author.id === founderId || Trusted) {
-                    function enableMultipleGuilds() {
+                    async function enableMultipleGuilds() {
                         const eGuilds = settings;
 
                         settings.AllowGuilds = true;
@@ -100,9 +103,10 @@ module.exports = {
 
                         const content = JSON.stringify(eGuilds, null, 2);
                         fs.writeFileSync('Commands/settings.json', content, 'utf8');
-
                     }
-                    enableMultipleGuilds()
+                    enableMultipleGuilds().then(
+                        console.log(yellowBright(`Restarting`))
+                    );
                 } else {
                     message.channel.send(notOwner)
                 }
