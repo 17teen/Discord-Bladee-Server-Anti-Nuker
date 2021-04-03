@@ -29,8 +29,8 @@ Database: `JSON`.
 Only fast nukers are used for testing. A generic nuke tool would not get passed **50 bans.**
 
 ### Set-Up Bot:
-- [Private Mode]()
-- [Global Mode]()
+- [Private Mode](https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker/tree/main/Private)
+- [Global Mode](https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker/tree/main/Global)
 
 ### Run:
 > Windows:
