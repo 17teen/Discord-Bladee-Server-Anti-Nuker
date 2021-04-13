@@ -51,8 +51,8 @@ module.exports = {
                             const TrustedUserIDArray = TrustedUserIDs;
 
                             
-                            const FindID = Array.find((el) => el === ID)
-                            const InArray = Array.includes(FindID);
+                            const FindID = TrustedUserIDArray.find((el) => el === ID)
+                            const InArray = TrustedUserIDArray.includes(FindID);
 
                             if (InArray === true) {
                                 return message.reply('This user has already been Trusted.').then((msg) => msg.delete({ timeout: 4000 })) && console.log(red('ERROR: USER ALREADY TRUSTED'));
