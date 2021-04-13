@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { founderId, LockGuildID, PermittedGuilds } = require('../settings.json');
+const { founderId, LockGuildID, PermittedGuilds, AllowGuilds } = require('../settings.json');
 const { red, yellowBright } = require('chalk');
 const TrustedUserIDs = require('../Database/trustedUserIDs.json');
 const settings = require('../settings.json');
