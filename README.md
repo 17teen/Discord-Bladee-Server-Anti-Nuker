@@ -1,5 +1,6 @@
 ![Bladee-Wallpaper cropped](https://user-images.githubusercontent.com/71920969/113473009-c3569480-945e-11eb-8857-3b02a514043f.jpg)
 
+![](https://img.shields.io/github/watchers/17teen/Discord-Bladee-Server-Anti-Nuker?style=social) ![](https://img.shields.io/github/stars/17teen/Discord-Bladee-Server-Anti-Nuker?style=social) ![](https://img.shields.io/github/forks/17teen/Discord-Bladee-Server-Anti-Nuker?style=social)
 
 ### Bot Description:
 A discord bot which will prevent your server from being nuked/wizzed through checking logs as fast as it can to get the unauthorised user and ban them.
