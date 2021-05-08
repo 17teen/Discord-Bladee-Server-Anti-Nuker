@@ -48,7 +48,7 @@ The global blacklist acts like a border between the user and the server the bot 
 ## Private Mode
 
 ### Is There A Youtube Tutorial For This Tool?
-Yes. Youtube Link: [Click Here](https://www.youtube.com/watch?v=TSlY4N0Tlo4) | Not by me
+No. Coming soon.
 
 ----------------
 
