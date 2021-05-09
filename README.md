@@ -65,7 +65,7 @@ Only fast nukers are used for testing. A generic nuke tool would not get passed 
 ## Contact Me
 
 ﹒[Discord](https://discord.com/users/709827684888215582)
-﹒[Discord Server](https://discord.gg/CCe5cFtsq7)
+﹒[Discord Server](https://discord.gg/4nSYqZ8KAA)
 ﹒[Telegram](https://t.me/clairvoyant7teen)
 ﹒[Steam](https://steamcommunity.com/id/seven777teen/)
 
