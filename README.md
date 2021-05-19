@@ -39,6 +39,9 @@ Only fast nukers are used for testing. A generic nuke tool would not get passed 
 > macOS: 
 * Type this in the console: `node .` (Private) | `node bladee.js` (Global)
 
+### Does This Work On Repl.it?
+Yes. [Click Here](https://replit.com/@17teen/Discord-Presser-Server-Nuker?v=1)
+
 # FAQs:
 
 - [General: Whitelisting](https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker/tree/main/FAQs#whitelisting)
