@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const { prefix, author, LockGuildID, PermittedGuilds, AllowGuilds, inviteLink, founderId } = require('../settings.json');
+const { red } = require('chalk');
 const TrustedUserIDs = require('../Database/trustedUserIDs.json');
 
 module.exports = {
