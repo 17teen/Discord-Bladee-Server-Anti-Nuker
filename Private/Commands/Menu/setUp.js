@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const { prefix, LockGuildID, PermittedGuilds, AllowGuilds } = require('../settings.json');
 const pagination = require("discord.js-pagination");
+const { red } = require('chalk');
 
 module.exports = {
     name: "setup",
