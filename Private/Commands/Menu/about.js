@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const { prefix, author, authorID, github, LockGuildID, PermittedGuilds, AllowGuilds, founder, founderId, sourceCode, SupportServer } = require('../settings.json');
+const { red } = require('chalk');
 
 module.exports = {
     name: "about",
