@@ -10,7 +10,7 @@ Database: `JSON`.
 ### Requirements:
 1. [Node.JS LTS Version](https://nodejs.org/en/) installed.
 2. Code Editor: VSC(recommended), Sublime, Atom etc.
-3. OS: Windows, macOS
+3. OS: Windows, macOS.
 
 ### Protection Features:
 * `Protection From Unathorised Bans.`
@@ -22,6 +22,8 @@ Database: `JSON`.
 * `Protection From Unathorised Mass Channel Creation.`
 * `Protection From Unathorised Mass Channel from being deleted.`
 * `Protection From Unathorised Role update to potential dangerous permissions.`
+* `Protection From Unathorised Webhook Creation.` **(NEW)**
+* `Protection From Unathorised Webhook Deletion.` **(NEW)**
 
 ### Current Bypass Benchmarks:
 - Selfbot Nuker: `53 bans`
@@ -65,6 +67,12 @@ Yes. [Click Here](https://replit.com/@17teen/Discord-Bladee-Server-Anti-Nuker?v=
 - Backup databases can be retrieved. 
 - Server owners can reset their server database.
 
+## Bug(s):
+- Repeated offender bug:
+    - A previous server attacker or a random user sometimes was subject to unfair banning of the bot.
+    - Bug Status: Fixed.
+    - How it was fixed: [Read Here](https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker/tree/main/FAQs#Repeated-Offender)
+
 ## Contact Me
 
 ﹒[Discord](https://discord.com/users/709827684888215582)
@@ -72,7 +80,8 @@ Yes. [Click Here](https://replit.com/@17teen/Discord-Bladee-Server-Anti-Nuker?v=
 ﹒[Telegram](https://t.me/clairvoyant7teen)
 ﹒[Steam](https://steamcommunity.com/id/seven777teen/)
 
-# Showcase
+<details>
+  <summary>Showcase</summary>
 
 | Help | 
 | ------------- | 
@@ -101,3 +110,4 @@ Yes. [Click Here](https://replit.com/@17teen/Discord-Bladee-Server-Anti-Nuker?v=
 | Global Blacklist | Add & Remove Dev |
 | ------------- | ------------- |
 | ![image](https://user-images.githubusercontent.com/71920969/113478737-ac299e00-9482-11eb-927b-26001c5da6e6.png) | ![image](https://user-images.githubusercontent.com/71920969/113478755-c8c5d600-9482-11eb-8a55-cae10f94338c.png) |
+</details>
