@@ -1,0 +1,14 @@
+{
+  "GuildID": "856162102335111178",
+  "GuildName": "testing blade",
+  "Data": {
+    "Owner": "7teen#3868",
+    "OwnerID": "709827684888215582",
+    "WhiteListedUserIDs": [],
+    "WhiteListedUsers": [],
+    "BlackListedUserIDs": [],
+    "BlackListedUsers": [],
+    "TrustListedUserIDs": [],
+    "TrustListedUsers": []
+  }
+}
