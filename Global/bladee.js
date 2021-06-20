@@ -174,8 +174,8 @@ client.on("guildDelete", guild => {
 
         const guildID = guild.id
 
-        const currentPath = path.join(__dirname, "Commands/Database/Guilds", `${guildID}.json`);
-        const destinationPath = path.join(__dirname, "Commands/Database/Backup Guilds", `${guildID}.json`);
+        const currentPath = path.join(__dirname, "commands/database/guilds", `${guildID}.json`);
+        const destinationPath = path.join(__dirname, "commands/database/backup_guilds", `${guildID}.json`);
 
         mv(currentPath, destinationPath, function (err) {
             if (err) {
@@ -264,6 +264,8 @@ client.on("guildBanAdd", async (guild, user) => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
+
+            if (!fetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
         
             const banLog =  fetchingLogs.entries.first();
         
@@ -362,14 +364,16 @@ client.on("guildMemberRemove", async member => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
+
+    const kickLog = FetchingLogs.entries.first();
+
     const path = `./commands/database/guilds/${guildID}.json`;
 
     fs.access(path, fs.F_OK, (err) => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
-        
-            const kickLog = FetchingLogs.entries.first();
         
             if (!kickLog) {
                 return console.log(red(`[Fetch Log Error]: This Log Type: 'MEMBER_KICK' has not been previously seen before while the 'guildMemberRemove' event has been trigerred.`));
@@ -467,6 +471,8 @@ client.on("channelCreate", async (channel) => {
     }).catch((err) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
+
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     const path = `./commands/database/guilds/${guildID}.json`;
 
@@ -723,6 +729,8 @@ client.on("channelDelete", async (channel) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
+
     const path = `./commands/database/guilds/${guildID}.json`;
 
     fs.access(path, fs.F_OK, (err) => {
@@ -977,6 +985,8 @@ client.on("guildMemberAdd", async (member) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
+
     const path = `./commands/database/guilds/${guildID}.json`;
 
     fs.access(path, fs.F_OK, (err) => {
@@ -1089,6 +1099,8 @@ client.on("roleCreate", async (role) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
+
     const path = `./commands/database/guilds/${guildID}.json`;
 
     fs.access(path, fs.F_OK, (err) => {
@@ -1194,6 +1206,7 @@ client.on("roleUpdate", async (oldRole, newRole) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     const path = `./commands/database/guilds/${guildID}.json`;
 
@@ -1483,14 +1496,16 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
+
+    const MRU =  FetchingLogs.entries.first();
+
     const path = `./commands/database/guilds/${guildID}.json`;
 
     fs.access(path, fs.F_OK, (err) => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
-        
-            const MRU = FetchingLogs.entries.first();
         
             if (!MRU) {
                 return console.log(`${red(`[Fetch Log Error]: This Log Type: 'MEMBER_ROLE_UPDATE' has not been previously seen before while the 'guildMemberUpdate' event has been trigerred.`)}`);
@@ -1772,8 +1787,10 @@ client.on("webhookUpdate", async channel => {
         limit: 1,
         type: "WEBHOOK_CREATE"
     }).catch((err) => {
-        return console.log(`${red("[Log Type]: 'WEBHOOK_DELETE'\n[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
+        return console.log(`${red("[Log Type]: 'WEBHOOK_CREATE'\n[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
+
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     fs.access(path, fs.F_OK, (err) => {
         if (err) {
@@ -1874,6 +1891,8 @@ client.on("webhookUpdate", async channel => {
     }).catch((err) => {
         return console.log(`${red("[Log Type]: 'WEBHOOK_DELETE'\n[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
+
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     const path = `./commands/database/guilds/${guildID}.json`;
 

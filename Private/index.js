@@ -186,6 +186,8 @@ client.on("guildBanAdd", async (guild, user) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
+    if (!fetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
+
     const banLog = fetchingLogs.entries.first();
 
     if (!banLog) {
@@ -276,6 +278,8 @@ client.on("guildMemberRemove", async member => {
     }).catch((err) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
+
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     const kickLog = FetchingLogs.entries.first();
         
@@ -370,6 +374,8 @@ client.on("channelCreate", async (channel) => {
     }).catch((err) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
+
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
     
     const ChannelLog = FetchingLogs.entries.first();
         
@@ -610,6 +616,8 @@ client.on("channelDelete", async (channel) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
+
     const ChannelLog = FetchingLogs.entries.first();
         
     if (!ChannelLog) {
@@ -849,6 +857,7 @@ client.on("guildMemberAdd", async (member) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
     
     const botAddLog = FetchingLogs.entries.first();
         
@@ -949,6 +958,7 @@ client.on("roleCreate", async (role) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
     
     const roleCreateLogs = FetchingLogs.entries.first();
         
@@ -1038,6 +1048,8 @@ client.on("roleUpdate", async (oldRole, newRole) => {
     }).catch((err) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
+
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     const RoleUpdate = FetchingLogs.entries.first();
         
@@ -1314,6 +1326,8 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
     }).catch((err) => {
         return console.log(`${red("[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
+
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     const MRU = FetchingLogs.entries.first();
         
@@ -1592,11 +1606,8 @@ client.on("webhookUpdate", async channel => {
     }).catch((err) => {
         return console.log(`${red("[Log Type]: 'WEBHOOK_DELETE'\n[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
-
-        if (err) {
-            return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
-        } else {
-        
+       
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
             const WBU = FetchingLogs.entries.first();
         
             if (!WBU) {
@@ -1673,7 +1684,6 @@ client.on("webhookUpdate", async channel => {
                     return console.log(`${grey(`[Event Validity]: False`)}\n${magenta("[Reason]: Event was triggered but the timestamps didn't match.")}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (Bot)")}\n${grey("======================================")}\n`)
                 }
             }
-        }
 
 });
 
@@ -1688,9 +1698,7 @@ client.on("webhookUpdate", async channel => {
         return console.log(`${red("[Log Type]: 'WEBHOOK_DELETE'\n[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
 
-        if (err) {
-            return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
-        } else {
+    if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
         
             const WBD =  FetchingLogs.entries.first();
         
@@ -1768,7 +1776,6 @@ client.on("webhookUpdate", async channel => {
                     return console.log(`${grey(`[Event Validity]: False`)}\n${magenta("[Reason]: Event was triggered but the timestamps didn't match.")}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (Bot)")}\n${grey("======================================")}\n`)
                 }
             }
-        }
 });
 
 
