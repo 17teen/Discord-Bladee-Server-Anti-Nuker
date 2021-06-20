@@ -18,7 +18,7 @@ module.exports = {
             if (message.author.id === founderId || DevsID) {
                     async function ClearGlobalBlacklist() {
                         const BLISTEDIDS = require('../../database/global_blacklist/blacklist.json');
-                        const BLISTEDUSERS = require('../../database/global_blacklist/blacklist.json');
+                        const BLISTEDUSERS = require('../../database/global_blacklist/blacklisted.json');
 
                         if (BLISTEDIDS.length === 0) {
 
@@ -36,7 +36,7 @@ module.exports = {
                             const content2 = JSON.stringify(BLISTEDUSERS, null, 2)
 
                             fs.writeFileSync(`commands/database/global_blacklist/blacklist.json`, content, 'utf8');
-                            fs.writeFileSync(`commands/database/global_blacklist/blacklist.json`, content2, 'utf8');
+                            fs.writeFileSync(`commands/database/global_blacklist/blacklisted.json`, content2, 'utf8');
 
                             console.log(yellowBright('\nClear Blacklist Successful \nData Saved ✅'))
                             const Successful = new Discord.MessageEmbed()
