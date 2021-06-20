@@ -11,7 +11,7 @@ module.exports = {
             .setDescription('Error: You must be a \`Dev\` to be granted access to this command.')
             .setColor(0x36393E)
 
-        const Array2 = require('../../Database/Global Blacklist/blacklisted.json');
+        const Array2 = require('../../database/global_blacklist/blacklisted.json');
 
         const DevsID = DEV_TEAM.find((userData) => userData === `${message.author.id}`)
 
