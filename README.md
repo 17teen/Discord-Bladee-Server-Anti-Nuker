@@ -64,6 +64,10 @@ Only fast nukers are used for testing. A generic nuke tool would not get passed 
 - Backup databases can be retrieved. 
 - Server owners can reset their server database.
 
+## Repl.it?
+
+- Yes. You can use this on Repl. [Click Here](https://replit.com/@17teen/Bladee-V3-Beta?v=1)
+
 ## Bug(s):
 - Repeated offender bug:
     - A previous server attacker or a random user sometimes was subject to unfair banning of the bot.
