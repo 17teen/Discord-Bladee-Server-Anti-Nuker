@@ -1474,7 +1474,7 @@ client.on("roleUpdate", async (oldRole, newRole) => {
                         return console.log(`${redBright("[ACTION]: NOT AUTHORISED BUT NOT THREATENING")}\n${grey("======================================")}\n`);
                     }
                 } else {
-                    return console.log(`${grey(`[Event Validity]: False`)}\n${magenta("[Reason]: Event was triggered but the timestamps didn't match.")}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + role.name + " (Role)")}\n${grey("======================================")}\n`)
+                    return console.log(`${grey(`[Event Validity]: False`)}\n${magenta("[Reason]: Event was triggered but the timestamps didn't match.")}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + oldRole.name + " (Role)")}\n${grey("======================================")}\n`)
                 }
             }
         }
