@@ -42,7 +42,7 @@ for (const category of fs.readdirSync(`./${commandDir}`)) {
 }
 
 // Listeners
-process.setMaxListeners(300); 
+process.setMaxListeners(300);
 // Customizations
 const { red, green, magenta, greenBright, magentaBright, yellowBright, blue, blueBright, grey, redBright, yellow, cyan, cyanBright } = require('chalk');
 // Title
@@ -203,7 +203,7 @@ client.on('guildMemberAdd', member => {
             const Info = require(`./commands/database/guilds/${guildID}.json`)
 
             const BlacklistedMember = Info.Data.BlackListedUserIDs.find((user) => user === `${member.id}`)
-        
+
             const noAccess = new MessageEmbed()
                 .setTitle('Unauthorised Access To Server: ' + member.guild.name)
                 .setDescription(`You've been blacklisted in **${member.guild.name}** and have been denied access of entry.\n
@@ -211,7 +211,7 @@ client.on('guildMemberAdd', member => {
         **Member Count:** ${member.guild.memberCount}\n
         *We suggest you DM the owner to be unblacklisted if you wish.*`)
                 .setTimestamp(Date.now());
-        
+
             const GnoAccess = new MessageEmbed()
                 .setTitle('Unauthorised Access To Server: ' + member.guild.name)
                 .setDescription(`You've been globally blacklisted in our Database hence why you cannot join, **${member.guild.name}** and have been denied access of entry.\n
@@ -220,7 +220,7 @@ client.on('guildMemberAdd', member => {
         **We suggest you DM the Bot Owner:**\n
         **Bot Owner:** <@${founderId}> | ${founder}`)
                 .setTimestamp(Date.now());
-        
+
             if (member.id === BlacklistedUserID) { // Global Blacklisted
                 member.send(GnoAccess)
                 setTimeout(function () {
@@ -266,49 +266,49 @@ client.on("guildBanAdd", async (guild, user) => {
         } else {
 
             if (!fetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
-        
-            const banLog =  fetchingLogs.entries.first();
-        
+
+            const banLog = fetchingLogs.entries.first();
+
             if (!banLog) {
                 return console.log(red(`[Fetch Log Error]: This Log Type: 'MEMBER_BAN_ADD' has not been previously seen before while the 'guildBanAdd' event has been trigerred.`));
             } else {
                 console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + guild.name)}\n${green("[Event]: 'guildBanAdd'")}\n${greenBright("[Log Type]: 'MEMBER_BAN_ADD'")}`)
-        
+
                 const { executor, target, createdAt, createdTimestamp } = banLog;
-        
+
                 console.log(`${greenBright(`[Event Desc.]: [USER]: ${target.tag} was banned from the server.`)}`);
-        
+
                 console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
+
                 /**
                 * Checks Whitelisted & Trusted Users Before banning
                 */
                 const guildID = guild.id;
-        
+
                 const Info = require(`./commands/database/guilds/${guildID}.json`)
-        
+
                 const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${user.id}`)
                 const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${user.id}`)
-        
+
                 const successfulBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Ban By:** ${executor.tag} \n**Victim:** ${target.tag} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Ban By:** ${executor.tag} \n**Victim:** ${target.tag} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given.`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const LogTimeString = createdTimestamp.toString();
                 const EventExecution = eventsTimestamp;
-        
+
                 const logtime = LogTimeString.slice(0, -3);
                 const eventtime = EventExecution.slice(0, -3);
-        
+
                 const logtime2 = LogTimeString.slice(0, -4);
                 const eventtime2 = EventExecution.slice(0, -4);
-        
+
                 if (logtime === eventtime) {
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === guild.owner.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
@@ -374,47 +374,47 @@ client.on("guildMemberRemove", async member => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
-        
+
             if (!kickLog) {
                 return console.log(red(`[Fetch Log Error]: This Log Type: 'MEMBER_KICK' has not been previously seen before while the 'guildMemberRemove' event has been trigerred.`));
             } else {
                 console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + member.guild.name)}\n${green("[Event]: 'guildMemberRemove'")}\n${greenBright("[Log Type]: 'MEMBER_KICK'")}`)
-        
+
                 const { executor, target, createdAt, createdTimestamp } = kickLog;
-        
+
                 console.log(`${greenBright(`[Event Desc.]: [USER]: ${target.tag} was kicked / removed from the server.`)}`);
                 console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
+
                 /**
                  * Checks Whitelisted & Trusted Users Before banning
                  */
-        
+
                 const LogTimeString = createdTimestamp.toString();
                 const EventExecution = eventsTimestamp;
-        
+
                 const logtime = LogTimeString.slice(0, -3);
                 const eventtime = EventExecution.slice(0, -3);
-        
+
                 const logtime2 = LogTimeString.slice(0, -4);
                 const eventtime2 = EventExecution.slice(0, -4);
-        
+
                 const guildID = member.guild.id;
-        
+
                 const Info = require(`./commands/database/guilds/${guildID}.json`)
-        
+
                 const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${member.id}`)
                 const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${member.id}`)
-        
+
                 const successfulKick = new MessageEmbed()
                     .setDescription(`**Unauthorised Kick By:** ${executor.tag} \n**Victim:** ${target.tag} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulKick = new MessageEmbed()
                     .setDescription(`**Unauthorised Kick By:** ${executor.tag} \n**Victim:** ${target.tag} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given.`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 if (logtime === eventtime) {
                     console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (User)")}`)
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
@@ -480,74 +480,74 @@ client.on("channelCreate", async (channel) => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
-        
+
             const ChannelLog = FetchingLogs.entries.first();
-        
+
             if (!ChannelLog) {
                 return console.log(red(`[Fetch Log Error]: This Log Type: 'CHANNEL_CREATE' has not been previously seen before while the 'channelCreate' event has been trigerred.`));
             } else {
                 console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + channel.guild.name)}\n${green("[Event]: 'channelCreate'")}\n${greenBright("[Log Type]: 'CHANNEL_CREATE'")}`);
-        
+
                 console.log(`${greenBright(`[Event Desc.]: [CHANNEL]: "${channel.name}" has been created in the server`)}`);
                 const { executor, createdAt, createdTimestamp } = ChannelLog;
-        
+
                 console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
+
                 const successfulBanText = new MessageEmbed()
                     .setDescription(`**Unauthorised Channel Created By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanCategory = new MessageEmbed()
                     .setDescription(`**Unauthorised Category Created By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanVoice = new MessageEmbed()
                     .setDescription(`**Unauthorised Voice Channel Created By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanStore = new MessageEmbed()
                     .setDescription(`**Unauthorised Store Channel Created By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanNews = new MessageEmbed()
                     .setDescription(`**Unauthorised Announcement Channel Created By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanUnkownChannel = new MessageEmbed()
                     .setDescription(`**Unauthorised Unkown Channel Type Created By:** ${executor.tag} \n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Channel Created By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given.`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 /**
                  * Checks Whitelisted & Trusted Users Before banning
                  */
-        
+
                 const guildID = channel.guild.id;
-        
+
                 const Info = require(`./commands/database/guilds/${guildID}.json`)
-        
+
                 const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${executor.id}`)
                 const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${executor.id}`)
-        
+
                 const LogTimeString = createdTimestamp.toString();
                 const EventExecution = eventsTimestamp;
-        
+
                 const logtime = LogTimeString.slice(0, -3);
                 const eventtime = EventExecution.slice(0, -3);
-        
+
                 const logtime2 = LogTimeString.slice(0, -4);
                 const eventtime2 = EventExecution.slice(0, -4);
-        
+
                 if (logtime === eventtime) {
                     console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + channel.name + " (Channel)")}`);
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
@@ -737,75 +737,75 @@ client.on("channelDelete", async (channel) => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
-        
+
             const ChannelLog = FetchingLogs.entries.first();
-        
+
             if (!ChannelLog) {
                 return console.log(red(`[Fetch Log Error]: This Log Type: 'CHANNEL_DELETE' has not been previously seen before while the 'channelDelete' event has been trigerred.`));
             } else {
                 console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + channel.guild.name)}\n${green("[Event]: 'channelDelete'")}\n${greenBright("[Log Type]: 'CHANNEL_DELETE'")}`)
-        
+
                 console.log(`${greenBright(`[Event Desc.]: [CHANNEL]: "${channel.name}" has been deleted in the server`)}`);
-        
+
                 const { executor, createdAt, createdTimestamp } = ChannelLog;
-        
+
                 console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
+
                 const successfulBanText = new MessageEmbed()
                     .setDescription(`**Unauthorised Channel Deleted By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanCategory = new MessageEmbed()
                     .setDescription(`**Unauthorised Category Deleted By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanVoice = new MessageEmbed()
                     .setDescription(`**Unauthorised Voice Channel Deleted By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanStore = new MessageEmbed()
                     .setDescription(`**Unauthorised Store Channel Deleted By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanNews = new MessageEmbed()
                     .setDescription(`**Unauthorised Announcement Channel Deleted By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanUnkownChannel = new MessageEmbed()
                     .setDescription(`**Unauthorised Unkown Channel Type Deleted By:** ${executor.tag} \n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Channel Deleted By:** ${executor.tag}\n\n**Channel:** \`${channel.name}\` \n**Channel ID:** ||${channel.id}|| \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given.`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 /**
                  * Checks Whitelisted & Trusted Users Before banning
                  */
-        
+
                 const guildID = channel.guild.id;
-        
+
                 const Info = require(`./commands/database/guilds/${guildID}.json`)
-        
+
                 const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${executor.id}`)
                 const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${executor.id}`)
-        
+
                 const LogTimeString = createdTimestamp.toString();
                 const EventExecution = eventsTimestamp;
-        
+
                 const logtime = LogTimeString.slice(0, -3);
                 const eventtime = EventExecution.slice(0, -3);
-        
+
                 const logtime2 = LogTimeString.slice(0, -4);
                 const eventtime2 = EventExecution.slice(0, -4);
-        
+
                 if (logtime === eventtime) {
                     console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + channel.name + " (Channel)")}`);
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
@@ -993,89 +993,86 @@ client.on("guildMemberAdd", async (member) => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
-        
+
             const botAddLog = FetchingLogs.entries.first();
-        
+
             if (!botAddLog) {
                 return console.log(`${red(`[Fetch Log Error]: This Log Type: 'BOT_ADD' has not been previously seen before while the 'guildMemberAdd' event has been trigerred.`)}`);
             } else {
-        
+
                 console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + member.guild.name)}\n${green("[Event]: 'guildMemberAdd'")}\n${greenBright("[Log Type]: 'BOT_ADD'")}`)
-        
+
                 const { executor, target, createdAt, createdTimestamp } = botAddLog;
-        
+
                 console.log(`${greenBright(`[Event Desc.]: [USER]: ${executor.tag} has invited a bot to the server.`)}`);
-        
+
                 console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
+
                 /**
                 * Checks Whitelisted & Trusted Users Before banning
                 */
                 const guildID = member.guild.id;
-        
+
                 const Info = require(`./commands/database/guilds/${guildID}.json`)
-        
-                const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${member.id}`)
-                const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${member.id}`)
-        
+
+                const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${executor.id}`)
+                const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${executor.id}`)
+
                 const successfulBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Bot Added By:** ${executor.tag} \n**Bot:** ${target.tag} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Bot Added By:** ${executor.tag} \n**Bot:** ${target.tag} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given.`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const LogTimeString = createdTimestamp.toString();
                 const EventExecution = eventsTimestamp;
-        
+
                 const logtime = LogTimeString.slice(0, -3);
                 const eventtime = EventExecution.slice(0, -3);
-        
+
                 const logtime2 = LogTimeString.slice(0, -4);
                 const eventtime2 = EventExecution.slice(0, -4);
-        
+
                 if (logtime === eventtime) {
                     console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (Bot)")}`)
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === member.guild.owner.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    if (target.bot) {
-                        member.guild.members.ban(executor.id, {
-                            reason: `Unauthorised Bot Added`
-                        }).then(member.guild.owner.send(successfulBan).catch((err) => {
+                    member.guild.members.ban(executor.id, {
+                        reason: `Unauthorised Bot Added`
+                    }).then(member.guild.owner.send(successfulBan).catch((err) => {
+                        return console.log(red("[Owner]: " + member.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                    })).then(member.guild.members.ban(target.id, {
+                        reason: "Unauthorised Bot"
+                    }).then(() => {
+                        console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`)
+                    })).catch((err) => {
+                        return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${red("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + member.guild.owner.send(unsuccessfulBan).catch((err) => {
                             return console.log(red("[Owner]: " + member.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                        })).then(member.guild.members.ban(target.id, {
-                            reason: "Unauthorised Bot"
-                        }).then(() => {
-                            console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`)
-                        })).catch((err) => {
-                            return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${red("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + member.guild.owner.send(unsuccessfulBan).catch((err) => {
-                                return console.log(red("[Owner]: " + member.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                            });
                         });
-                    }
+                    });
                 } else if (logtime2 === eventtime2) {
                     console.log(`${grey(`[Event Validity #2]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (Bot)")}`)
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === member.guild.owner.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    if (target.bot) {
-                        member.guild.members.ban(executor.id, {
-                            reason: `Unauthorised Bot Added`
-                        }).then(member.guild.owner.send(successfulBan))
-                            .then(member.guild.members.ban(target.id, {
-                                reason: "Unauthorised Bot"
-                            }).then(() => {
-                                console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`)
-                            })).catch((err) => {
-                                return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${magentaBright("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + member.guild.owner.send(unsuccessfulBan).catch((err) => {
-                                    return console.log(red("[Owner]: " + member.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                                });
-                            });
-                    }
+                    member.guild.members.ban(executor.id, {
+                        reason: `Unauthorised Bot Added`
+                    }).then(member.guild.owner.send(successfulBan).catch((err) => {
+                        return console.log(red("[Owner]: " + member.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                    })).then(member.guild.members.ban(target.id, {
+                        reason: "Unauthorised Bot"
+                    }).then(() => {
+                        console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`)
+                    })).catch((err) => {
+                        return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${red("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + member.guild.owner.send(unsuccessfulBan).catch((err) => {
+                            return console.log(red("[Owner]: " + member.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                        });
+                    });
                 } else {
                     return console.log(`${grey(`[Event Validity]: False`)}\n${magenta("[Reason]: Event was triggered but the timestamps didn't match.")}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (Bot)")}\n${grey("======================================")}\n`)
                 }
@@ -1107,50 +1104,50 @@ client.on("roleCreate", async (role) => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
-        
+
             const roleCreateLogs = FetchingLogs.entries.first();
-        
+
             if (!roleCreateLogs) {
                 return console.log(`${red(`[Fetch Log Error]: This Log Type: 'ROLE_CREATE' has not been previously seen before while the 'roleCreate' event has been trigerred.`)}`);
             } else {
                 console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + role.guild.name)}\n${green("[Event]: 'roleCreate'")}\n${greenBright("[Log Type]: 'ROLE_CREATE'")}`)
-        
+
                 console.log(`${greenBright(`[Event Desc.]: [Role]: ${role.name} was created in the server.`)}`);
-        
+
                 const { executor, createdAt, createdTimestamp } = roleCreateLogs;
-        
+
                 console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
+
                 /**
                 * Checks Whitelisted & Trusted Users Before banning
                 */
-        
+
                 const successfulBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Created By:** ${executor.tag}\n\n**Role:** ${role.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Created By:** ${executor.tag}\n\n**Role:** ${role.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given.`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const guildID = role.guild.id;
-        
+
                 const Info = require(`./commands/database/guilds/${guildID}.json`)
-        
+
                 const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${executor.id}`)
                 const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${executor.id}`)
-        
+
                 const LogTimeString = createdTimestamp.toString();
                 const EventExecution = eventsTimestamp;
-        
+
                 const logtime = LogTimeString.slice(0, -3);
                 const eventtime = EventExecution.slice(0, -3);
-        
+
                 const logtime2 = LogTimeString.slice(0, -4);
                 const eventtime2 = EventExecution.slice(0, -4);
-        
+
                 if (logtime === eventtime) {
                     console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + role.name + " (Role)")}`)
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
@@ -1187,7 +1184,7 @@ client.on("roleCreate", async (role) => {
                     return console.log(`${grey(`[Event Validity]: False`)}\n${magenta("[Reason]: Event was triggered but the timestamps didn't match.")}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + role.name + " (Role)")}\n${grey("======================================")}\n`)
                 }
             }
-        
+
         }
     })
 });
@@ -1216,108 +1213,108 @@ client.on("roleUpdate", async (oldRole, newRole) => {
         } else {
 
             const RoleUpdate = FetchingLogs.entries.first();
-        
+
             if (!RoleUpdate) {
                 return console.log(`${red(`[Fetch Log Error]: This Log Type: 'ROLE_UPDATE' has not been previously seen before while the 'roleUpdate' event has been trigerred.`)}`);
             } else {
                 console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + oldRole.guild.name)}\n${green("[Event]: 'roleUpdate'")}\n${greenBright("[Log Type]: 'ROLE_UPDATE'")}`)
-        
+
                 console.log(`${greenBright(`[Event Desc.]: [Role]: ${oldRole.name} was updated in the server.`)}`);
-        
+
                 const { executor, createdAt, createdTimestamp } = RoleUpdate;
-        
+
                 console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
+
                 /**
                 * Checks Whitelisted & Trusted Users Before banning
                 */
-        
+
                 const successfulAdminPermBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`ADMINISTRATOR\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban | Role Removal.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulKickPermBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`KICK_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban | Role Removal.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanPermBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`BAN_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban | Role Removal.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulWebhookPermBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`MANAGE_WEBHOOKS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban | Role Removal.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 //  Unsuccessful Embeds (Unable to ban executor)
-        
+
                 const unsuccessfulAdminPermBanExecutor = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`ADMINISTRATOR\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Executor.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulKickPermBanExecutor = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`KICK_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Executor.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBanPermBanExecutor = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`BAN_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Executor.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulWebhookPermBanExecutor = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`MANAGE_WEBHOOKS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Executor.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 // Unsuccessful Embeds (Unable to delete role)
-        
+
                 const unsuccessfulAdminPermBanRole = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`ADMINISTRATOR\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Role.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulKickPermBanRole = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`KICK_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Role.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBanPermBanRole = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`BAN_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Role.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulWebhookPermBanRole = new MessageEmbed()
                     .setDescription(`**Unauthorised Role Update By:** ${executor.tag}\n\n**Role:** ${oldRole.name} \n**Permission Update:** \`MANAGE_WEBHOOKS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Role.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const guildID = oldRole.guild.id;
-        
+
                 const Info = require(`./commands/database/guilds/${guildID}.json`)
-        
+
                 const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${executor.id}`)
                 const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${executor.id}`)
-        
+
                 const LogTimeString = createdTimestamp.toString();
                 const EventExecution = eventsTimestamp;
-        
+
                 const logtime = LogTimeString.slice(0, -3);
                 const eventtime = EventExecution.slice(0, -3);
-        
+
                 const logtime2 = LogTimeString.slice(0, -4);
                 const eventtime2 = EventExecution.slice(0, -4);
-        
+
                 if (logtime === eventtime) {
                     console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + oldRole.name + " (Role)")}`);
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === oldRole.guild.owner.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-        
+
                     if (!oldRole.permissions.has("ADMINISTRATOR") && newRole.permissions.has("ADMINISTRATOR")) {
                         oldRole.guild.members.ban(executor.id, {
                             reason: `Unauthorised Role Updated: Admin permissions were added.`
@@ -1498,7 +1495,7 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
 
     if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
-    const MRU =  FetchingLogs.entries.first();
+    const MRU = FetchingLogs.entries.first();
 
     const path = `./commands/database/guilds/${guildID}.json`;
 
@@ -1506,109 +1503,109 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
-        
+
             if (!MRU) {
                 return console.log(`${red(`[Fetch Log Error]: This Log Type: 'MEMBER_ROLE_UPDATE' has not been previously seen before while the 'guildMemberUpdate' event has been trigerred.`)}`);
             } else {
-        
+
                 console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + newMember.guild.name)}\n${green("[Event]: 'guildMemberUpdate'")}\n${greenBright("[Log Type]: 'MEMBER_ROLE_UPDATE'")}`)
-        
+
                 console.log(`${greenBright(`[Event Desc.]: [USER/BOT]: ${oldMember.user.tag} Roles, Permissions or Nickname has been changed in the server.`)}`);
-        
+
                 const { executor, target, createdAt, createdTimestamp } = MRU;
-        
-        
+
+
                 console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
+
                 /**
                 * Checks Whitelisted & Trusted Users Before banning
                 */
                 const guildID = newMember.guild.id;
-        
+
                 const Info = require(`./commands/database/guilds/${guildID}.json`)
-        
+
                 const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${executor.id}`)
                 const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${executor.id}`)
-        
+
                 const successfulAdminPermBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`ADMINISTRATOR\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban | Executor & Victim.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulKickPermBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`KICK_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban | Executor & Victim.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulBanPermBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`BAN_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban | Executor & Victim.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const successfulWebhookPermBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`MANAGE_WEBHOOKS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban | Executor & Victim.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 // Unsuccessful Ban Executor
-        
+
                 const unsuccessfulBanAdminPermsExecutor = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`ADMINISTRATOR\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Executor**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBanWebhookPermsExecutor = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`MANAGE_WEBHOOKS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Executor**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBanPermsExecutor = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`BAN_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Executor**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBanKickPermsExecutor = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`KICK_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Executor**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 // Unsuccessful Ban Victim
-        
+
                 const unsuccessfulBanAdminPermsVictim = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`ADMINISTRATOR\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Victim.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBanWebhookPermsVictim = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`MANAGE_WEBHOOKS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Victim.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBanPermsVictim = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`BAN_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Victim.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const unsuccessfulBanKickPermsVictim = new MessageEmbed()
                     .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`KICK_MEMBERS\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not Given To The **Victim.**`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 const LogTimeString = createdTimestamp.toString();
                 const EventExecution = eventsTimestamp;
-        
+
                 const logtime = LogTimeString.slice(0, -3);
                 const eventtime = EventExecution.slice(0, -3);
-        
+
                 const logtime2 = LogTimeString.slice(0, -4);
                 const eventtime2 = EventExecution.slice(0, -4);
-        
+
                 if (logtime === eventtime) {
                     console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (Bot/User)")}`)
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === newMember.guild.ownerID) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-        
+
                     if (!oldMember.permissions.has("ADMINISTRATOR") && newMember.permissions.has("ADMINISTRATOR")) {
                         oldMember.guild.members.ban(executor.id, {
                             reason: `Unauthorised Member Role Updated`
@@ -1689,7 +1686,7 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === newMember.guild.ownerID) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
                     if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-        
+
                     if (!oldMember.permissions.has("ADMINISTRATOR") && newMember.permissions.has("ADMINISTRATOR")) {
                         oldMember.guild.members.ban(executor.id, {
                             reason: `Unauthorised Member Role Updated`
@@ -1796,52 +1793,52 @@ client.on("webhookUpdate", async channel => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
-        
+
             const WBU = FetchingLogs.entries.first();
-        
+
             if (!WBU) {
                 return console.log(`${red(`[Fetch Log Error]: This Log Type: 'WEBHOOK_CREATE' has not been previously seen before while the 'webhookUpdate' event has been trigerred.`)}`);
             } else {
                 const { executor, target, createdAt, createdTimestamp } = WBU;
-        
+
                 console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + channel.guild.name)}\n${green("[Event]: 'webhookUpdate'")}\n${greenBright("[Log Type]: 'WEBHOOK_CREATE'")}`)
                 console.log(`${greenBright(`[Event Desc.]: [Webhook]: ${target.name} Was created`)}`);
-        
+
                 console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
+
                 /**
                 * Checks Whitelisted & Trusted Users Before banning
                 */
                 const guildID = channel.guild.id;
-        
+
                 const Info = require(`./commands/database/guilds/${guildID}.json`)
-        
+
                 const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${executor.id}`);
                 const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${executor.id}`);
-        
+
                 // Unsuccessful Ban Executor
-        
+
                 const WebhookBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Webhook Created By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const WebhookBanError = new MessageEmbed()
                     .setDescription(`**Unauthorised Webhook Created By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not given.\n**Reason:** Missing Permissions.`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 // Unsuccessful Ban Victim
-        
+
                 const LogTimeString = createdTimestamp.toString();
                 const EventExecution = eventsTimestamp;
-        
+
                 const logtime = LogTimeString.slice(0, -3);
                 const eventtime = EventExecution.slice(0, -3);
-        
+
                 const logtime2 = LogTimeString.slice(0, -4);
                 const eventtime2 = EventExecution.slice(0, -4);
-        
+
                 if (logtime === eventtime) {
                     console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.name + " (Webhook)")}`)
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
@@ -1900,52 +1897,52 @@ client.on("webhookUpdate", async channel => {
         if (err) {
             return console.error(yellowBright('[WARNING]: Databse for Guild ID: ' + guildID + ' has not been set up as an Event has been triggered. Tip: Use [prefix]set for setting up a Database.'))
         } else {
-        
-            const WBD =  FetchingLogs.entries.first();
-        
+
+            const WBD = FetchingLogs.entries.first();
+
             if (!WBD) {
                 return console.log(`${red(`[Fetch Log Error]: This Log Type: 'WEBHOOK_DELETE' has not been previously seen before while the 'webhookUpdate' event has been trigerred.`)}`);
             } else {
                 const { executor, target, createdAt, createdTimestamp } = WBD;
-        
+
                 console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + channel.guild.name)}\n${green("[Event]: 'webhookUpdate'")}\n${greenBright("[Log Type]: 'WEBHOOK_DELETE'")}`)
                 console.log(`${greenBright(`[Event Desc.]: [Webhook]: ${target.name} Was deleted.`)}`);
-        
+
                 console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
+
                 /**
                 * Checks Whitelisted & Trusted Users Before banning
                 */
                 const guildID = channel.guild.id;
-        
+
                 const Info = require(`./commands/database/guilds/${guildID}.json`)
-        
+
                 const WhiteListedUser = Info.Data.WhiteListedUserIDs.find((us) => us === `${executor.id}`);
                 const Trusted = Info.Data.TrustListedUserIDs.find((u) => u === `${executor.id}`);
-        
+
                 // Unsuccessful Ban Executor
-        
+
                 const WebhookBan = new MessageEmbed()
                     .setDescription(`**Unauthorised Webhook Deleted By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
                     .setColor(0x36393E)
                     .setTimestamp(Date.now());
-        
+
                 const WebhookBanError = new MessageEmbed()
                     .setDescription(`**Unauthorised Webhook Deleted By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not given.\n**Reason:** Missing Permissions.`)
                     .setColor("RED")
                     .setTimestamp(Date.now());
-        
+
                 // Unsuccessful Ban Victim
-        
+
                 const LogTimeString = createdTimestamp.toString();
                 const EventExecution = eventsTimestamp;
-        
+
                 const logtime = LogTimeString.slice(0, -3);
                 const eventtime = EventExecution.slice(0, -3);
-        
+
                 const logtime2 = LogTimeString.slice(0, -4);
                 const eventtime2 = EventExecution.slice(0, -4);
-        
+
                 if (logtime === eventtime) {
                     console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.name + " (Webhook)")}`)
                     if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
