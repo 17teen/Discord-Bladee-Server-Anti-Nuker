@@ -61,9 +61,7 @@ module.exports = {
                         fs.writeFileSync('commands/settings.json', content, 'utf8');
                     }
                     disableMultipleGuilds()
-                    setTimeout(function () {
-                        process.exit();
-                    }, 1000)
+
                 } else {
                     message.channel.send(notOwner)
                 }
@@ -108,9 +106,7 @@ module.exports = {
                         fs.writeFileSync('commands/settings.json', content, 'utf8');
                     }
                     disableMultipleGuilds()
-                    setTimeout(function () {
-                        process.exit();
-                    }, 1000)
+
                 } else {
                     message.channel.send(notOwner)
                 }

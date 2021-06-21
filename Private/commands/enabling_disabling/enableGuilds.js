@@ -62,12 +62,7 @@ module.exports = {
                         fs.writeFileSync('commands/settings.json', content, 'utf8');
 
                     }
-                    enableMultipleGuilds().then(() => {
-                        console.log(yellowBright(`Restarting`))
-                        setTimeout(() => {
-                            process.exit(1);
-                        }, 1000);
-                    });
+                    enableMultipleGuilds()
                 } else {
                     message.channel.send(notOwner)
                 }
@@ -115,12 +110,7 @@ module.exports = {
                         const content = JSON.stringify(eGuilds, null, 2);
                         fs.writeFileSync('commands/settings.json', content, 'utf8');
                     }
-                    enableMultipleGuilds().then(() => {
-                        console.log(yellowBright(`Restarting`))
-                        setTimeout(() => {
-                            process.exit(1);
-                        }, 1000);
-                    });
+                    enableMultipleGuilds()
                 } else {
                     message.channel.send(notOwner)
                 }

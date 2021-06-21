@@ -66,7 +66,7 @@ Only fast nukers are used for testing. A generic nuke tool would not get passed 
 
 ## Repl.it?
 
-- Yes. You can use this on Repl. [Click Here](https://replit.com/@17teen/Bladee-V3-Beta?v=1)
+- Yes. You can use this on Repl. [Click Here](https://replit.com/@17teen/bladee?v=1)
 
 ## Bug(s):
 - Repeated offender bug:

@@ -74,9 +74,7 @@ module.exports = {
                             }
                         }
                         TrustUser(GetMember.id)
-                        setTimeout(function () {
-                            process.exit();
-                        }, 1000)
+
                     } else {
                         message.channel.send(notOwner)
                     }
@@ -146,9 +144,7 @@ module.exports = {
                             }
                         }
                         TrustUser(GetMember.id)
-                        setTimeout(function () {
-                            process.exit();
-                        }, 1000)
+
                     } else {
                         message.channel.send(notOwner)
                     }

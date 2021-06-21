@@ -42,10 +42,22 @@ module.exports = {
                         if (bans.size == 0) {
                             message.reply("There are no banned users.")
                         } else {
-                            bans.forEach(ban => {
-                                message.guild.members.unban(ban.user.id);
+                            let counter = 0;
+                            let n = 1;
+                            const banSize = bans.size;
+                            const unbanning = new MessageEmbed()
+                                .setDescription(`Currently unbanning users. (${counter}/${banSize})`)
+                                .setColor(0x36393E)
+                            message.channel.send(unbanning).then((msg) => {
+                                bans.forEach((user) => {
+                                    const unbanning1 = new MessageEmbed()
+                                        .setDescription(`Currently unbanning users. (${n++}/${banSize})`)
+                                        .setColor(0x36393E)
+                                    message.guild.members.unban(user.user.id).then(() => {
+                                        msg.edit({ embed: unbanning1 })
+                                    }).catch((err) => console.log(err))
+                                })
                             })
-                            message.channel.send(`Unbanning All Banned Members.`)
                         }
                     }
                     )
@@ -84,10 +96,22 @@ module.exports = {
                         if (bans.size == 0) {
                             message.reply("There are no banned users.")
                         } else {
-                            bans.forEach(ban => {
-                                message.guild.members.unban(ban.user.id);
+                            let counter = 0;
+                            let n = 1;
+                            const banSize = bans.size;
+                            const unbanning = new MessageEmbed()
+                                .setDescription(`Currently unbanning users. (${counter}/${banSize})`)
+                                .setColor(0x36393E)
+                            message.channel.send(unbanning).then((msg) => {
+                                bans.forEach((user) => {
+                                    const unbanning1 = new MessageEmbed()
+                                        .setDescription(`Currently unbanning users. (${n++}/${banSize})`)
+                                        .setColor(0x36393E)
+                                    message.guild.members.unban(user.user.id).then(() => {
+                                        msg.edit({ embed: unbanning1 })
+                                    }).catch((err) => console.log(err))
+                                })
                             })
-                            message.channel.send(`Unbanning All Banned Members.`)
                         }
                     }
                     )

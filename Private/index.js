@@ -282,7 +282,7 @@ client.on("guildMemberRemove", async member => {
     if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     const kickLog = FetchingLogs.entries.first();
-        
+
     if (!kickLog) {
         return console.log(red(`[Fetch Log Error]: This Log Type: 'MEMBER_KICK' has not been previously seen before while the 'guildMemberRemove' event has been trigerred.`));
     } else {
@@ -376,9 +376,9 @@ client.on("channelCreate", async (channel) => {
     });
 
     if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
-    
+
     const ChannelLog = FetchingLogs.entries.first();
-        
+
     if (!ChannelLog) {
         return console.log(red(`[Fetch Log Error]: This Log Type: 'CHANNEL_CREATE' has not been previously seen before while the 'channelCreate' event has been trigerred.`));
     } else {
@@ -427,11 +427,12 @@ client.on("channelCreate", async (channel) => {
         /**
          * Checks Whitelisted & Trusted Users Before banning
          */
-         const Acess = require('./commands/Database/whitelist.json');
+        const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
+        const Acess = require('./commands/Database/whitelist.json');
 
-         const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
-         const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
- 
+        const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
+        const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
+
         const LogTimeString = createdTimestamp.toString();
         const EventExecution = eventsTimestamp;
 
@@ -619,7 +620,7 @@ client.on("channelDelete", async (channel) => {
     if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     const ChannelLog = FetchingLogs.entries.first();
-        
+
     if (!ChannelLog) {
         return console.log(red(`[Fetch Log Error]: This Log Type: 'CHANNEL_DELETE' has not been previously seen before while the 'channelDelete' event has been trigerred.`));
     } else {
@@ -669,10 +670,10 @@ client.on("channelDelete", async (channel) => {
         /**
          * Checks Whitelisted & Trusted Users Before banning
          */
-         const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
-         const Acess = require('./commands/Database/whitelist.json');
-         const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
-         const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
+        const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
+        const Acess = require('./commands/Database/whitelist.json');
+        const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
+        const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
 
         const LogTimeString = createdTimestamp.toString();
         const EventExecution = eventsTimestamp;
@@ -858,9 +859,9 @@ client.on("guildMemberAdd", async (member) => {
     });
 
     if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
-    
+
     const botAddLog = FetchingLogs.entries.first();
-        
+
     if (!botAddLog) {
         return console.log(`${red(`[Fetch Log Error]: This Log Type: 'BOT_ADD' has not been previously seen before while the 'guildMemberAdd' event has been trigerred.`)}`);
     } else {
@@ -876,11 +877,11 @@ client.on("guildMemberAdd", async (member) => {
         /**
         * Checks Whitelisted & Trusted Users Before banning
         */
-         const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
-         const Acess = require('./commands/Database/whitelist.json');
+        const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
+        const Acess = require('./commands/Database/whitelist.json');
 
-         const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
-         const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
+        const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
+        const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
 
         const successfulBan = new MessageEmbed()
             .setDescription(`**Unauthorised Bot Added By:** ${executor.tag} \n**Bot:** ${target.tag} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
@@ -959,9 +960,9 @@ client.on("roleCreate", async (role) => {
     });
 
     if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
-    
+
     const roleCreateLogs = FetchingLogs.entries.first();
-        
+
     if (!roleCreateLogs) {
         return console.log(`${red(`[Fetch Log Error]: This Log Type: 'ROLE_CREATE' has not been previously seen before while the 'roleCreate' event has been trigerred.`)}`);
     } else {
@@ -987,8 +988,11 @@ client.on("roleCreate", async (role) => {
             .setColor("RED")
             .setTimestamp(Date.now());
 
-            const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
-            const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
+        const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
+        const Acess = require('./commands/Database/whitelist.json');
+
+        const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
+        const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
 
         const LogTimeString = createdTimestamp.toString();
         const EventExecution = eventsTimestamp;
@@ -1052,7 +1056,7 @@ client.on("roleUpdate", async (oldRole, newRole) => {
     if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     const RoleUpdate = FetchingLogs.entries.first();
-        
+
     if (!RoleUpdate) {
         return console.log(`${red(`[Fetch Log Error]: This Log Type: 'ROLE_UPDATE' has not been previously seen before while the 'roleUpdate' event has been trigerred.`)}`);
     } else {
@@ -1132,11 +1136,11 @@ client.on("roleUpdate", async (oldRole, newRole) => {
             .setColor("RED")
             .setTimestamp(Date.now());
 
-            const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
-            const Acess = require('./commands/Database/whitelist.json');
+        const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
+        const Acess = require('./commands/Database/whitelist.json');
 
-            const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
-            const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
+        const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
+        const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
 
         const LogTimeString = createdTimestamp.toString();
         const EventExecution = eventsTimestamp;
@@ -1330,7 +1334,7 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
     if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
 
     const MRU = FetchingLogs.entries.first();
-        
+
     if (!MRU) {
         return console.log(`${red(`[Fetch Log Error]: This Log Type: 'MEMBER_ROLE_UPDATE' has not been previously seen before while the 'guildMemberUpdate' event has been trigerred.`)}`);
     } else {
@@ -1347,11 +1351,11 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
         /**
         * Checks Whitelisted & Trusted Users Before banning
         */
-         const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
-         const Acess = require('./commands/Database/whitelist.json');
+        const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
+        const Acess = require('./commands/Database/whitelist.json');
 
-         const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
-         const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
+        const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
+        const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
 
         const successfulAdminPermBan = new MessageEmbed()
             .setDescription(`**Unauthorised Member Role Update By:** ${executor.tag}\n\n**Victim** ${target.tag} \n**Permission Update:** \`ADMINISTRATOR\` \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban | Executor & Victim.`)
@@ -1606,84 +1610,84 @@ client.on("webhookUpdate", async channel => {
     }).catch((err) => {
         return console.log(`${red("[Log Type]: 'WEBHOOK_DELETE'\n[Log Error]: True")}\n${red("[Log Error Desc.]: " + err)}`)
     });
-       
+
     if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
-            const WBU = FetchingLogs.entries.first();
-        
-            if (!WBU) {
-                return console.log(`${red(`[Fetch Log Error]: This Log Type: 'WEBHOOK_CREATE' has not been previously seen before while the 'webhookUpdate' event has been trigerred.`)}`);
-            } else {
-                const { executor, target, createdAt, createdTimestamp } = WBU;
-        
-                console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + channel.guild.name)}\n${green("[Event]: 'webhookUpdate'")}\n${greenBright("[Log Type]: 'WEBHOOK_CREATE'")}`)
-                console.log(`${greenBright(`[Event Desc.]: [Webhook]: ${target.name} Was created`)}`);
-        
-                console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
-                /**
-                * Checks Whitelisted & Trusted Users Before banning
-                */
-                const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
+    const WBU = FetchingLogs.entries.first();
+
+    if (!WBU) {
+        return console.log(`${red(`[Fetch Log Error]: This Log Type: 'WEBHOOK_CREATE' has not been previously seen before while the 'webhookUpdate' event has been trigerred.`)}`);
+    } else {
+        const { executor, target, createdAt, createdTimestamp } = WBU;
+
+        console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + channel.guild.name)}\n${green("[Event]: 'webhookUpdate'")}\n${greenBright("[Log Type]: 'WEBHOOK_CREATE'")}`)
+        console.log(`${greenBright(`[Event Desc.]: [Webhook]: ${target.name} Was created`)}`);
+
+        console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
+
+        /**
+        * Checks Whitelisted & Trusted Users Before banning
+        */
+        const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
         const Acess = require('./commands/Database/whitelist.json');
 
-                 const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
-                 const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
-        
-                // Unsuccessful Ban Executor
-        
-                const WebhookBan = new MessageEmbed()
-                    .setDescription(`**Unauthorised Webhook Created By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
-                    .setColor(0x36393E)
-                    .setTimestamp(Date.now());
-        
-                const WebhookBanError = new MessageEmbed()
-                    .setDescription(`**Unauthorised Webhook Created By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not given.\n**Reason:** Missing Permissions.`)
-                    .setColor("RED")
-                    .setTimestamp(Date.now());
-        
-                // Unsuccessful Ban Victim
-        
-                const LogTimeString = createdTimestamp.toString();
-                const EventExecution = eventsTimestamp;
-        
-                const logtime = LogTimeString.slice(0, -3);
-                const eventtime = EventExecution.slice(0, -3);
-        
-                const logtime2 = LogTimeString.slice(0, -4);
-                const eventtime2 = EventExecution.slice(0, -4);
-        
-                if (logtime === eventtime) {
-                    console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.name + " (Webhook)")}`)
-                    if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    if (executor.id === channel.guild.ownerID) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    channel.guild.member(executor).ban({ reason: "Unauthorised Webhook Creation" }).catch((err) => {
-                        return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${magentaBright("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBanError).catch((err) => {
-                            return console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                        });
-                    }).then(() => {
-                        return console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBan).catch((err) => {
-                            console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                        });
-                    })
-                } else if (logtime2 === eventtime2) {
-                    console.log(`${grey(`[Event Validity #2]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.name + " (Webhook)")}`)
-                    if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    if (executor.id === channel.guild.ownerID) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    channel.guild.member(executor).ban({ reason: "Unauthorised Webhook Creation" }).catch((err) => {
-                        return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${magentaBright("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBanError).catch((err) => {
-                            console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                        });
-                    }).then(() => {
-                        return console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBan).catch((err) => {
-                            console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                        });
-                    })
-                } else {
-                    return console.log(`${grey(`[Event Validity]: False`)}\n${magenta("[Reason]: Event was triggered but the timestamps didn't match.")}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (Bot)")}\n${grey("======================================")}\n`)
-                }
-            }
+        const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
+        const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
+
+        // Unsuccessful Ban Executor
+
+        const WebhookBan = new MessageEmbed()
+            .setDescription(`**Unauthorised Webhook Created By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
+            .setColor(0x36393E)
+            .setTimestamp(Date.now());
+
+        const WebhookBanError = new MessageEmbed()
+            .setDescription(`**Unauthorised Webhook Created By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not given.\n**Reason:** Missing Permissions.`)
+            .setColor("RED")
+            .setTimestamp(Date.now());
+
+        // Unsuccessful Ban Victim
+
+        const LogTimeString = createdTimestamp.toString();
+        const EventExecution = eventsTimestamp;
+
+        const logtime = LogTimeString.slice(0, -3);
+        const eventtime = EventExecution.slice(0, -3);
+
+        const logtime2 = LogTimeString.slice(0, -4);
+        const eventtime2 = EventExecution.slice(0, -4);
+
+        if (logtime === eventtime) {
+            console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.name + " (Webhook)")}`)
+            if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            if (executor.id === channel.guild.ownerID) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            channel.guild.member(executor).ban({ reason: "Unauthorised Webhook Creation" }).catch((err) => {
+                return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${magentaBright("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBanError).catch((err) => {
+                    return console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                });
+            }).then(() => {
+                return console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBan).catch((err) => {
+                    console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                });
+            })
+        } else if (logtime2 === eventtime2) {
+            console.log(`${grey(`[Event Validity #2]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.name + " (Webhook)")}`)
+            if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            if (executor.id === channel.guild.ownerID) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            channel.guild.member(executor).ban({ reason: "Unauthorised Webhook Creation" }).catch((err) => {
+                return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${magentaBright("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBanError).catch((err) => {
+                    console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                });
+            }).then(() => {
+                return console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBan).catch((err) => {
+                    console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                });
+            })
+        } else {
+            return console.log(`${grey(`[Event Validity]: False`)}\n${magenta("[Reason]: Event was triggered but the timestamps didn't match.")}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (Bot)")}\n${grey("======================================")}\n`)
+        }
+    }
 
 });
 
@@ -1699,83 +1703,83 @@ client.on("webhookUpdate", async channel => {
     });
 
     if (!FetchingLogs) return console.log(red("[Entries Error] Unable to fetch Entries."));
-        
-            const WBD =  FetchingLogs.entries.first();
-        
-            if (!WBD) {
-                return console.log(`${red(`[Fetch Log Error]: This Log Type: 'WEBHOOK_DELETE' has not been previously seen before while the 'webhookUpdate' event has been trigerred.`)}`);
-            } else {
-                const { executor, target, createdAt, createdTimestamp } = WBD;
-        
-                console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + channel.guild.name)}\n${green("[Event]: 'webhookUpdate'")}\n${greenBright("[Log Type]: 'WEBHOOK_DELETE'")}`)
-                console.log(`${greenBright(`[Event Desc.]: [Webhook]: ${target.name} Was deleted.`)}`);
-        
-                console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
-        
-                /**
-                * Checks Whitelisted & Trusted Users Before banning
-                */
-                const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
+
+    const WBD = FetchingLogs.entries.first();
+
+    if (!WBD) {
+        return console.log(`${red(`[Fetch Log Error]: This Log Type: 'WEBHOOK_DELETE' has not been previously seen before while the 'webhookUpdate' event has been trigerred.`)}`);
+    } else {
+        const { executor, target, createdAt, createdTimestamp } = WBD;
+
+        console.log(`\n\n${grey("======================================")}\n${yellow("[!] An Event has been fired.")}\n${yellowBright("[Server]: " + channel.guild.name)}\n${green("[Event]: 'webhookUpdate'")}\n${greenBright("[Log Type]: 'WEBHOOK_DELETE'")}`)
+        console.log(`${greenBright(`[Event Desc.]: [Webhook]: ${target.name} Was deleted.`)}`);
+
+        console.log(`${blue(`[Log Timestamp]: ${createdTimestamp}`)}\n${blueBright(`[Event Timestamp]: ${eventsTimestamp}`)}`);
+
+        /**
+        * Checks Whitelisted & Trusted Users Before banning
+        */
+        const TrustedUserIDs = require('./commands/Database/trustedUserIDs.json');
         const Acess = require('./commands/Database/whitelist.json');
-        
-                 const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
-                 const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
-        
-                // Unsuccessful Ban Executor
-        
-                const WebhookBan = new MessageEmbed()
-                    .setDescription(`**Unauthorised Webhook Deleted By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
-                    .setColor(0x36393E)
-                    .setTimestamp(Date.now());
-        
-                const WebhookBanError = new MessageEmbed()
-                    .setDescription(`**Unauthorised Webhook Deleted By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not given.\n**Reason:** Missing Permissions.`)
-                    .setColor("RED")
-                    .setTimestamp(Date.now());
-        
-                // Unsuccessful Ban Victim
-        
-                const LogTimeString = createdTimestamp.toString();
-                const EventExecution = eventsTimestamp;
-        
-                const logtime = LogTimeString.slice(0, -3);
-                const eventtime = EventExecution.slice(0, -3);
-        
-                const logtime2 = LogTimeString.slice(0, -4);
-                const eventtime2 = EventExecution.slice(0, -4);
-        
-                if (logtime === eventtime) {
-                    console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.name + " (Webhook)")}`)
-                    if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    if (executor.id === channel.guild.ownerID) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    channel.guild.member(executor).ban({ reason: "Unauthorised Webhook Deleted" }).catch((err) => {
-                        return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${magentaBright("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBanError).catch((err) => {
-                            return console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                        });
-                    }).then(() => {
-                        return console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBan).catch((err) => {
-                            console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                        });
-                    })
-                } else if (logtime2 === eventtime2) {
-                    console.log(`${grey(`[Event Validity #2]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.name + " (Webhook)")}`)
-                    if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    if (executor.id === channel.guild.ownerID) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
-                    channel.guild.member(executor).ban({ reason: "Unauthorised Webhook Deleted" }).catch((err) => {
-                        return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${magentaBright("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBanError).catch((err) => {
-                            console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                        });
-                    }).then(() => {
-                        return console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBan).catch((err) => {
-                            console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
-                        });
-                    })
-                } else {
-                    return console.log(`${grey(`[Event Validity]: False`)}\n${magenta("[Reason]: Event was triggered but the timestamps didn't match.")}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (Bot)")}\n${grey("======================================")}\n`)
-                }
-            }
+
+        const WhiteListedUser = Acess.find(el => el === `${executor.id}`)
+        const Trusted = TrustedUserIDs.find((user) => user === `${executor.id}`);
+
+        // Unsuccessful Ban Executor
+
+        const WebhookBan = new MessageEmbed()
+            .setDescription(`**Unauthorised Webhook Deleted By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Ban.`)
+            .setColor(0x36393E)
+            .setTimestamp(Date.now());
+
+        const WebhookBanError = new MessageEmbed()
+            .setDescription(`**Unauthorised Webhook Deleted By:** ${executor.tag}\n\n**Webhook Name:** ${target.name} \n**Time:** ${createdAt.toDateString()} \n**Sentence:** Not given.\n**Reason:** Missing Permissions.`)
+            .setColor("RED")
+            .setTimestamp(Date.now());
+
+        // Unsuccessful Ban Victim
+
+        const LogTimeString = createdTimestamp.toString();
+        const EventExecution = eventsTimestamp;
+
+        const logtime = LogTimeString.slice(0, -3);
+        const eventtime = EventExecution.slice(0, -3);
+
+        const logtime2 = LogTimeString.slice(0, -4);
+        const eventtime2 = EventExecution.slice(0, -4);
+
+        if (logtime === eventtime) {
+            console.log(`${grey(`[Event Validity #1]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.name + " (Webhook)")}`)
+            if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            if (executor.id === channel.guild.ownerID) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            channel.guild.member(executor).ban({ reason: "Unauthorised Webhook Deleted" }).catch((err) => {
+                return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${magentaBright("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBanError).catch((err) => {
+                    return console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                });
+            }).then(() => {
+                return console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBan).catch((err) => {
+                    console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                });
+            })
+        } else if (logtime2 === eventtime2) {
+            console.log(`${grey(`[Event Validity #2]: True`)}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.name + " (Webhook)")}`)
+            if (executor.id === client.user.id) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            if (executor.id === channel.guild.ownerID) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            if (executor.id === WhiteListedUser || Trusted) return console.log(`${magentaBright(`[Action Type]: AUTHORISED`)}\n${grey("======================================")}\n`);
+            channel.guild.member(executor).ban({ reason: "Unauthorised Webhook Deleted" }).catch((err) => {
+                return console.log(`${redBright("[Trial]: False")}\n${red("[Sentence]: No Sentence Given")}\n${magentaBright("[Sentence Error]: " + err)}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBanError).catch((err) => {
+                    console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                });
+            }).then(() => {
+                return console.log(`${redBright("[Trial]: True")}\n${red("[Sentence]: Ban")}\n${grey("======================================")}\n`) + channel.guild.owner.send(WebhookBan).catch((err) => {
+                    console.log(red("[Owner]: " + channel.guild.owner.user.tag + " could not be messaged. [Message Error Desc.]: " + err));
+                });
+            })
+        } else {
+            return console.log(`${grey(`[Event Validity]: False`)}\n${magenta("[Reason]: Event was triggered but the timestamps didn't match.")}\n${cyan("[Executor]: " + executor.tag)}\n${cyanBright("[Target]: " + target.tag + " (Bot)")}\n${grey("======================================")}\n`)
+        }
+    }
 });
 
 

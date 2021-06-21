@@ -74,9 +74,7 @@ module.exports = {
 
                     }
                     UnwhitelistAll()
-                    setTimeout(function () {
-                        process.exit();
-                    }, 1000)
+
                 } else {
                     message.channel.send(notOwner)
                 }
@@ -137,9 +135,7 @@ module.exports = {
 
                     }
                     UnwhitelistAll()
-                    setTimeout(function () {
-                        process.exit();
-                    }, 1000)
+
                 } else {
                     message.channel.send(notOwner)
                 }

@@ -79,9 +79,7 @@ module.exports = {
                         message.channel.send(NoGuildID)
                     } else {
                         AddGuilds(GuildID)
-                        setTimeout(function () {
-                            process.exit();
-                        }, 1000)
+
                     }
                 } else {
                     message.channel.send(notOwner)
@@ -148,9 +146,7 @@ module.exports = {
                         message.channel.send(NoGuildID)
                     } else {
                         AddGuilds(GuildID)
-                        setTimeout(function () {
-                            process.exit();
-                        }, 1000)
+
                     }
                 } else {
                     message.channel.send(notOwner)
