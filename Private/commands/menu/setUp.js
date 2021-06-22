@@ -39,17 +39,11 @@ module.exports = {
             .setColor(0x36393E)
             .setTimestamp(Date.now());
 
-        const pages = [
-            page1,
-            page2,
-            page3,
-            page4,
-            page5
-        ]
+        const pages = [ page1, page2, page3, page4, page5 ]
 
         const emojis = ["⏪", "⏩"];
 
-        const timeout = '100000'
+        const timeout = '100000';
 
         const AllowedGuildIDs = PermittedGuilds.find((g) => g === `${message.guild.id}`)
         if (AllowGuilds === false) {
@@ -76,8 +70,8 @@ module.exports = {
                     message.guild.leave();
                 }, 6000)
             } else {
-                pagination(message, pages, emojis, timeout).catch(() => {
-                    console.error(red(`[COMMAND FAILED] : [GUILD] ${message.guild.name} | [CHANNEL] ${message.channel.name} | [REASON] MISSING PERMISSIONS`));
+                pagination(message, pages, emojis, timeout).catch((err) => {
+                    console.error(red(`[COMMAND FAILED] : [GUILD] ${message.guild.name} | [CHANNEL] ${message.channel.name} | [REASON] MISSING PERMISSIONS | ${err}`));
                 });
             }
         } else {
@@ -104,8 +98,8 @@ module.exports = {
                     message.guild.leave();
                 }, 6000)
             } else {
-                pagination(message, pages, emojis, timeout).catch(() => {
-                    console.error(red(`[COMMAND FAILED] : [GUILD] ${message.guild.name} | [CHANNEL] ${message.channel.name} | [REASON] MISSING PERMISSIONS`));
+                pagination(message, pages, emojis, timeout).catch((err) => {
+                    console.error(red(`[COMMAND FAILED] : [GUILD] ${message.guild.name} | [CHANNEL] ${message.channel.name} | [REASON] MISSING PERMISSIONS | ${err}`));
                 });
             }
         }

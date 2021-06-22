@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const { prefix, author } = require('../settings.json');
+const { red } = require("chalk");
 
 module.exports = {
     name: "other",
@@ -20,8 +21,8 @@ module.exports = {
             .setFooter(`© ${client.user.username} | Prefix: ${prefix} | By: ${author}`)
             .setColor(0x36393E)
             .setTimestamp(Date.now());
-        message.channel.send(help).catch(() => {
-            console.error(red(`[COMMAND FAILED] : [GUILD] ${message.guild.name} | [CHANNEL] ${message.channel.name} | [REASON] MISSING PERMISSIONS`));
+        message.channel.send(help).catch((err) => {
+            console.error(red(`[COMMAND FAILED] : [GUILD] ${message.guild.name} | [CHANNEL] ${message.channel.name} | [REASON] MISSING PERMISSIONS | ${err}`));
         });
     }
 }

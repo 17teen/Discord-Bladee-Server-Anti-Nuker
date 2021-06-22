@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const { prefix, DEV_TEAM, founderId } = require('../settings.json');
 const pagination = require("discord.js-pagination");
+const { red } = require("chalk");
 
 module.exports = {
     name: "setup",
@@ -47,21 +48,14 @@ module.exports = {
                 .setColor(0x36393E)
                 .setTimestamp(Date.now());
     
-            const pages = [
-                page0,
-                page1,
-                page2,
-                page3,
-                page4,
-                page5
-            ]
+            const pages = [ page0, page1, page2, page3, page4, page5 ]
     
             const emojis = ["⏪", "⏩"];
     
-            const timeout = '100000'
+            const timeout = '100000';
     
-            pagination(message, pages, emojis, timeout).catch(() => {
-                console.error(red(`[COMMAND FAILED] : [GUILD] ${message.guild.name} | [CHANNEL] ${message.channel.name} | [REASON] MISSING PERMISSIONS`));
+            pagination(message, pages, emojis, timeout).catch((err) => {
+                console.error(red(`[COMMAND FAILED] : [GUILD] ${message.guild.name} | [CHANNEL] ${message.channel.name} | [REASON] MISSING PERMISSIONS | ${err}`));
             });
         } else {
             const page0 = new Discord.MessageEmbed()
@@ -88,19 +82,14 @@ module.exports = {
                 .setColor(0x36393E)
                 .setTimestamp(Date.now());
     
-            const pages = [
-                page0,
-                page1,
-                page2,
-                page3,
-            ]
+            const pages = [ page0, page1, page2, page3 ]
     
             const emojis = ["⏪", "⏩"];
     
-            const timeout = '100000'
+            const timeout = '100000';
     
-            pagination(message, pages, emojis, timeout).catch(() => {
-                console.error(red(`[COMMAND FAILED] : [GUILD] ${message.guild.name} | [CHANNEL] ${message.channel.name} | [REASON] MISSING PERMISSIONS`));
+            pagination(message, pages, emojis, timeout).catch((err) => {
+                console.error(red(`[COMMAND FAILED] : [GUILD] ${message.guild.name} | [CHANNEL] ${message.channel.name} | [REASON] MISSING PERMISSIONS | ${err}`));
             });
         }
 
