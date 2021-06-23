@@ -76,8 +76,9 @@ if: `AllowGuilds` is set to `true`
 
 ## Bugs:
 
-### Repeated Offender:
-
+<details>
+  <summary>Repeated Offender</summary>
+  
 **Description:** A previous server attacker or a random user sometimes was subject to unfair banning of the bot.
 
 **Issue: Explained**
@@ -85,3 +86,4 @@ if: `AllowGuilds` is set to `true`
 ![Repeated Offender Bug](https://user-images.githubusercontent.com/71920969/122656137-e0daf680-d14f-11eb-94d9-63691a371598.png)
 
 **How it was solved:** Keeping a record of the event timestamp and the log timestamp then comparing the two timestamps to see if they're close enough to come to a conclusion that an offense / unauthorised action is deemed valid to ban or to not.
+</details>
