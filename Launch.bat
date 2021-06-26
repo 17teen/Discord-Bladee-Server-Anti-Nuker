@@ -1,14 +1,11 @@
 @echo off
-title Launching Modules v.1.1.0
-cls
-echo [!] Modules will be installed on your system...
-pause
-cls
-echo Tip: For the first installation, you are only required to press the Enter key untill you have nothing else to fill in.
-pause
-cls
-echo Starting:
-    call npm init
-    call npm install discord.js@12.5.1 chalk discord.js-pagination mv
-pause
-exit
+title Bladee Anti-Nuke
+
+if exist node_modules\ (
+  echo You've already installed this
+  echo Navigate to Global directory or the Private directory
+) else (
+  call npm i >> NUL
+  echo Succesfully installed!
+  echo Please re-run this file.
+)
