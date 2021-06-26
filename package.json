@@ -1,0 +1,21 @@
+{
+  "name": "discord-bladee-server-anti-nuker",
+  "version": "1.0.0",
+  "description": "Discord Server Anti Nuke Tool to stop your server from being destroyed.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker.git"
+  },
+  "author": "7teen",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker/issues"
+  },
+  "homepage": "https://github.com/17teen/Discord-Bladee-Server-Anti-Nuker#readme",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "discord.js": "^12.5.1",
+    "discord.js-pagination": "^1.0.3",
+    "mv": "^2.1.1"
+  }
+}
