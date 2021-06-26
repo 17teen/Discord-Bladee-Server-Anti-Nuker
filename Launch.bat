@@ -9,9 +9,6 @@ pause
 cls
 echo Starting:
     call npm init
-    call npm install discord.js@12.5.1
-    call npm install chalk
-    call npm install discord.js-pagination
-    call npm install mv
+    call npm install discord.js@12.5.1 chalk discord.js-pagination mv
 pause
 exit
